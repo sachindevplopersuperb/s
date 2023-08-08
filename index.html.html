@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>game</title>
+	<style type="text/css">
+		*{
+
+margin: 0px;
+padding: 0px;
+box-sizing: border-box;
+		}
+		body{
+			background:rosybrown;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+		}
+		#game{
+width: 390px;
+height: 500px;
+background-image: url(bg.jpg);
+background-size: contain;
+overflow: hidden;
+		}
+#bluecar{
+height: 100px;
+	width: 130px;
+	position: relative;
+	background: ;
+	animation: 2s move linear infinite ;	
+}
+@keyframes move{
+
+0%{
+	top: 0px;
+}
+100%{
+
+	top: 523px;
+}
+
+}
+#redcar{
+height: 100px;
+	width: 130px;
+	position: relative;
+	background: ;
+	top: 255px;
+left: 130px;
+}
+#redcar img{
+
+	
+	height: 100px;
+}
+#bluecar img{
+height: 100px;
+	
+}
+#button{
+display: flex;
+justify-content: center;
+align-items: center;
+justify-content: space-between;
+}
+#right{
+padding: 31px;
+background:pink ;
+}
+#left{
+padding: 31px;
+background:lightgreen ;
+}
+#result{
+display:none ;
+
+font-size: ;
+
+text-align: 62px;
+}
+#result h1{
+	 
+font-size: 52px;
+background:pink;
+width: 533px;
+height: 122px;
+text-align: center;
+}
+#result p{
+	border-radius: 12%;
+	font-weight: bold;
+	color: black;
+	border: 2px dotted yellow;
+font-size: 52px;
+border: 3px solid yellow;
+background:darkblue;
+color: white;
+width: 533px;
+height: 122px;
+text-align: center;
+}
+#btn{
+font-weight: bold;
+	color: ;
+font-size: 52px;
+border: 6px solid yellow;
+background:ivory;
+width: 533px;
+height: 122px;
+text-align: center;
+
+}
+
+	</style>
+</head>
+<body>
+<div id="game">
+	<div id="bluecar"><img src="race.png"></div>
+<div id="redcar"><img src="blue.png"></div></div>
+<div id="button">
+<button id="left">left</button>
+<button id="right">right</button>
+
+
+</div>
+<div id="result">
+	<h1>GAME-OVER</h1>
+	<p id="score">score</p>
+	<button id="btn" onclick="location.reload()">Restart</button>
+</div>
+
+<audio id="jump" src="jump.mp3"></audio>
+<audio id="music" src="music.mp3"></audio>
+<script>
+
+	var music=document.getElementById("music");
+	var jump=document.getElementById("jump");
+	var body=document.body;
+	var score=document.getElementById("score");
+	var right=document.getElementById("left");
+	var left=document.getElementById("left");
+	var game=document.getElementById("game");
+	var result=document.getElementById("result");
+var bluecar=document.getElementById("redcar");
+
+var bluecar=document.getElementById("bluecar");
+var counter=0;
+
+bluecar.addEventListener("animationiteration",function(){
+music.play()
+var random=(Math.floor(Math.random()*3)*130);
+bluecar.style.left=(random)+"px";
+counter++;
+
+});
+
+
+//
+ var right=document.getElementById("right");
+right.addEventListener("click",function(){
+var rightkey=parseInt(window.getComputedStyle(redcar).getPropertyValue("left"))
+if(rightkey<220){redcar.style.left=(rightkey+130)+"px"
+	jump.play()
+}
+});
+
+var left=document.getElementById("left");
+left.addEventListener("click",function(){
+var rightkey=parseInt(window.getComputedStyle(redcar).getPropertyValue("left"))
+if(rightkey>0){redcar.style.left=(rightkey-130)+"px"
+	jump.play()
+}
+});
+
+//game over
+
+setInterval(function Gameover(){
+	var blueCarTop = parseInt(window.getComputedStyle(bluecar).getPropertyValue("top"))
+	var blueCarLeft = parseInt(window.getComputedStyle(bluecar).getPropertyValue("left"));
+ var rightkey = parseInt(window.getComputedStyle(redcar).getPropertyValue("left"));
+
+if((blueCarLeft===rightkey) && (blueCarTop > 250)&&(blueCarTop < 450)){
+right.style.display="none"
+left.style.display="none"
+game.style.display="none"
+body.style.backgroundColor="black";
+music.pause()
+score.innerText=`score =${counter}`
+	result.style.display="block"
+
+}
+},10)
+
+
+
+
+</script>
+</body>
+</html>
